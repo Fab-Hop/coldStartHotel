@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import itertools
 import rdflib
-from rdflib.namespace import RDF, SDO
+from rdflib.namespace import RDF, SDO, OWL
 
 def readTripAdvisorData(filepath):
     tripAdvisorDf = pd.read_csv(filepath, sep='|', names=range(18)) 
@@ -24,13 +24,14 @@ def createGraph(hotelDf, outputFilepath):
 
     ammenitySet = set(itertools.chain(*hotelDf.dropna(subset=['ammenities'])['ammenities']))
 
-    SDO = rdflib.Namespace('http://schema.org/')
+    #SDO = rdflib.Namespace('http://schema.org/')
     EX = rdflib.Namespace('http://example.org/')
 
     graph=rdflib.Graph()
     graph.bind('SDO', SDO)
     graph.bind('RDF', RDF)
     graph.bind('EX', EX)
+    graph.bind('OWL',OWL)
     
     ammenityDict = dict()
     
@@ -52,8 +53,15 @@ def createGraph(hotelDf, outputFilepath):
             graph.add((hotelURI, SDO.priceRange  ,rdflib.Literal(x['price'])))
     
         # set amenityFeature property
-        for xx in x['ammenities']:
-            graph.add((hotelURI, SDO.amenityFeature, ammenityDict[xx]))
+        for xx in ammenityDict.keys():
+            if xx in x['ammenities']:
+                graph.add((hotelURI, SDO.amenityFeature, ammenityDict[xx]))
+            else:# set negated property instantiation
+                negativeProperty = rdflib.BNode()
+                graph.add((negativeProperty, RDF.type, OWL.NegativePropertyAssertion))
+                graph.add((negativeProperty, OWL.sourceIndividual, hotelURI))
+                graph.add((negativeProperty, OWL.assertionProperty,SDO.amenityFeature ))
+                graph.add((negativeProperty, OWL.targetIndividual, ammenityDict[xx]))
     
     # write graph
     graph.serialize(destination=outputFilepath, format='n3')
