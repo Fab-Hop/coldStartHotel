@@ -1,0 +1,350 @@
+@prefix EX: <http://example.org/> .
+@prefix OWL: <http://www.w3.org/2002/07/owl#> .
+@prefix SDO: <https://schema.org/> .
+@prefix RDF: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+#################################################################
+#    Schema.org elements (to enable reasoning)
+#################################################################
+
+###  https://schema.org/amenityFeature
+SDO:amenityFeature RDF:type OWL:ObjectProperty .
+
+###  https://schema.org/priceRange
+SDO:priceRange RDF:type OWL:DatatypeProperty .
+
+###  https://schema.org/value
+SDO:value RDF:type OWL:DatatypeProperty .
+
+###  https://schema.org/Hotel
+SDO:Hotel RDF:type OWL:Class .
+
+###  https://schema.org/LocationFeatureSpecification
+SDO:LocationFeatureSpecification RDF:type OWL:Class .
+
+#################################################################
+#    Hotel Subclasses
+#################################################################
+
+###  http://example.org/Business
+EX:Business RDF:type OWL:Class ;
+            OWL:equivalentClass [ OWL:intersectionOf ( SDO:Hotel
+                                                       [ OWL:intersectionOf ( [ RDF:type OWL:Class ;
+                                                                                OWL:complementOf [ RDF:type OWL:Restriction ;
+                                                                                                   OWL:onProperty SDO:amenityFeature ;
+                                                                                                   OWL:hasValue EX:tripAdviserAmmenity08
+                                                                                                 ]
+                                                                              ]
+                                                                              [ RDF:type OWL:Restriction ;
+                                                                                OWL:onProperty SDO:amenityFeature ;
+                                                                                OWL:someValuesFrom EX:BusShuttle
+                                                                              ]
+                                                                              [ RDF:type OWL:Restriction ;
+                                                                                OWL:onProperty SDO:amenityFeature ;
+                                                                                OWL:someValuesFrom EX:FreeWiFi
+                                                                              ]
+                                                                              [ RDF:type OWL:Restriction ;
+                                                                                OWL:onProperty SDO:amenityFeature ;
+                                                                                OWL:someValuesFrom EX:MeetingRoom
+                                                                              ]
+                                                                              [ RDF:type OWL:Restriction ;
+                                                                                OWL:onProperty SDO:amenityFeature ;
+                                                                                OWL:someValuesFrom EX:Restaurant
+                                                                              ]
+                                                                            ) ;
+                                                         RDF:type OWL:Class
+                                                       ]
+                                                     ) ;
+                                  RDF:type OWL:Class
+                                ] .
+
+###  http://example.org/Family
+EX:Family RDF:type OWL:Class ;
+          OWL:equivalentClass [ OWL:intersectionOf ( SDO:Hotel
+                                                     [ OWL:intersectionOf ( [ RDF:type OWL:Class ;
+                                                                              OWL:complementOf [ RDF:type OWL:Restriction ;
+                                                                                                 OWL:onProperty SDO:amenityFeature ;
+                                                                                                 OWL:hasValue EX:tripAdviserAmmenity09
+                                                                                               ]
+                                                                            ]
+                                                                            [ RDF:type OWL:Restriction ;
+                                                                              OWL:onProperty SDO:amenityFeature ;
+                                                                              OWL:someValuesFrom EX:FamiliyFriendly
+                                                                            ]
+                                                                            [ RDF:type OWL:Restriction ;
+                                                                              OWL:onProperty SDO:amenityFeature ;
+                                                                              OWL:someValuesFrom EX:Restaurant
+                                                                            ]
+                                                                          ) ;
+                                                       RDF:type OWL:Class
+                                                     ]
+                                                   ) ;
+                                RDF:type OWL:Class
+                              ] .
+
+###  http://example.org/Wellness
+EX:Wellness RDF:type OWL:Class ;
+            OWL:equivalentClass [ OWL:intersectionOf ( SDO:Hotel
+                                                       [ OWL:intersectionOf ( [ RDF:type OWL:Restriction ;
+                                                                                OWL:onProperty SDO:amenityFeature ;
+                                                                                OWL:someValuesFrom EX:Gym
+                                                                              ]
+                                                                              [ RDF:type OWL:Restriction ;
+                                                                                OWL:onProperty SDO:amenityFeature ;
+                                                                                OWL:someValuesFrom EX:RoomService
+                                                                              ]
+                                                                              [ RDF:type OWL:Restriction ;
+                                                                                OWL:onProperty SDO:amenityFeature ;
+                                                                                OWL:someValuesFrom EX:Spa
+                                                                              ]
+                                                                              [ RDF:type OWL:Restriction ;
+                                                                                OWL:onProperty SDO:amenityFeature ;
+                                                                                OWL:someValuesFrom EX:SwimmingPool
+                                                                              ]
+                                                                              [ RDF:type OWL:Restriction ;
+                                                                                OWL:onProperty SDO:amenityFeature ;
+                                                                                OWL:hasValue EX:tripAdviserAmmenity08
+                                                                              ]
+                                                                            ) ;
+                                                         RDF:type OWL:Class
+                                                       ]
+                                                     ) ;
+                                  RDF:type OWL:Class
+                                ] .
+
+
+
+#################################################################
+#    Amenity Subclasses
+#################################################################
+
+###  http://example.org/Bar
+EX:Bar RDF:type OWL:Class ;
+       OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                  [ RDF:type OWL:Restriction ;
+                                                    OWL:onProperty SDO:value ;
+                                                    OWL:hasValue "Bar / Lounge"@en
+                                                  ]
+                                                ) ;
+                             RDF:type OWL:Class
+                           ] .
+
+
+###  http://example.org/Beach
+EX:Beach RDF:type OWL:Class ;
+         OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                    [ RDF:type OWL:Restriction ;
+                                                      OWL:onProperty SDO:value ;
+                                                      OWL:hasValue "Beach"@en
+                                                    ]
+                                                  ) ;
+                               RDF:type OWL:Class
+                             ] .
+
+
+###  http://example.org/BusShuttle
+EX:BusShuttle RDF:type OWL:Class ;
+              OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                         [ RDF:type OWL:Class ;
+                                                           OWL:unionOf ( [ RDF:type OWL:Restriction ;
+                                                                           OWL:onProperty SDO:value ;
+                                                                           OWL:hasValue "Airport Transportation"@en
+                                                                         ]
+                                                                         [ RDF:type OWL:Restriction ;
+                                                                           OWL:onProperty SDO:value ;
+                                                                           OWL:hasValue "Shuttle Bus service"@en
+                                                                         ]
+                                                                       )
+                                                         ]
+                                                       ) ;
+                                    RDF:type OWL:Class
+                                  ] .
+
+
+
+
+
+###  http://example.org/FamiliyFriendly
+EX:FamiliyFriendly RDF:type OWL:Class ;
+                   OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                              [ RDF:type OWL:Restriction ;
+                                                                OWL:onProperty SDO:value ;
+                                                                OWL:hasValue "Children Activities ( Kid / Family Friendly )"@en
+                                                              ]
+                                                            ) ;
+                                         RDF:type OWL:Class
+                                       ] .
+
+
+
+###  http://example.org/FreeBreakfast
+EX:FreeBreakfast RDF:type OWL:Class ;
+                 OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                            [ RDF:type OWL:Restriction ;
+                                                              OWL:onProperty SDO:value ;
+                                                              OWL:hasValue "Free Breakfast"@en
+                                                            ]
+                                                          ) ;
+                                       RDF:type OWL:Class
+                                     ] .
+
+
+###  http://example.org/FreeParking
+EX:FreeParking RDF:type OWL:Class ;
+               OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                          [ RDF:type OWL:Restriction ;
+                                                            OWL:onProperty SDO:value ;
+                                                            OWL:hasValue "Free Parking"@en
+                                                          ]
+                                                        ) ;
+                                     RDF:type OWL:Class
+                                   ] .
+
+
+###  http://example.org/FreeWiFi
+EX:FreeWiFi RDF:type OWL:Class ;
+            OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                       [ RDF:type OWL:Restriction ;
+                                                         OWL:onProperty SDO:value ;
+                                                         OWL:hasValue "Free High Speed Internet ( WiFi )"@en
+                                                       ]
+                                                     ) ;
+                                  RDF:type OWL:Class
+                                ] .
+
+
+###  http://example.org/Gym
+EX:Gym RDF:type OWL:Class ;
+       OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                  [ RDF:type OWL:Restriction ;
+                                                    OWL:onProperty SDO:value ;
+                                                    OWL:hasValue "Fitness Center with Gym / Workout Room"@en
+                                                  ]
+                                                ) ;
+                             RDF:type OWL:Class
+                           ] .
+
+
+###  http://example.org/Kitchenette
+EX:Kitchenette RDF:type OWL:Class ;
+               OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                          [ RDF:type OWL:Restriction ;
+                                                            OWL:onProperty SDO:value ;
+                                                            OWL:hasValue "Kitchenette"@en
+                                                          ]
+                                                        ) ;
+                                     RDF:type OWL:Class
+                                   ] .
+
+
+###  http://example.org/MeetingRoom
+EX:MeetingRoom RDF:type OWL:Class ;
+               OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                          [ RDF:type OWL:Restriction ;
+                                                            OWL:onProperty SDO:value ;
+                                                            OWL:hasValue "Business Center with Internet Access"@en
+                                                          ]
+                                                        ) ;
+                                     RDF:type OWL:Class
+                                   ] .
+
+
+###  http://example.org/PetFriendly
+EX:PetFriendly RDF:type OWL:Class ;
+               OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                          [ RDF:type OWL:Restriction ;
+                                                            OWL:onProperty SDO:value ;
+                                                            OWL:hasValue "Pets Allowed ( Dog / Pet Friendly )"@en
+                                                          ]
+                                                        ) ;
+                                     RDF:type OWL:Class
+                                   ] .
+
+
+###  http://example.org/Restaurant
+EX:Restaurant RDF:type OWL:Class ;
+              OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                         [ RDF:type OWL:Restriction ;
+                                                           OWL:onProperty SDO:value ;
+                                                           OWL:hasValue "Restaurant"@en
+                                                         ]
+                                                       ) ;
+                                    RDF:type OWL:Class
+                                  ] .
+
+
+###  http://example.org/RoomService
+EX:RoomService RDF:type OWL:Class ;
+               OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                          [ RDF:type OWL:Restriction ;
+                                                            OWL:onProperty SDO:value ;
+                                                            OWL:hasValue "Room Service"@en
+                                                          ]
+                                                        ) ;
+                                     RDF:type OWL:Class
+                                   ] .
+
+
+###  http://example.org/SkiInSkiOut
+EX:SkiInSkiOut RDF:type OWL:Class ;
+               OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                          [ RDF:type OWL:Restriction ;
+                                                            OWL:onProperty SDO:value ;
+                                                            OWL:hasValue "Ski-In / Ski-Out"@en
+                                                          ]
+                                                        ) ;
+                                     RDF:type OWL:Class
+                                   ] .
+
+
+###  http://example.org/Spa
+EX:Spa RDF:type OWL:Class ;
+       OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                  [ RDF:type OWL:Restriction ;
+                                                    OWL:onProperty SDO:value ;
+                                                    OWL:hasValue "Spa"@en
+                                                  ]
+                                                ) ;
+                             RDF:type OWL:Class
+                           ] .
+
+
+###  http://example.org/Suites
+EX:Suites RDF:type OWL:Class ;
+          OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                     [ RDF:type OWL:Restriction ;
+                                                       OWL:onProperty SDO:value ;
+                                                       OWL:hasValue "Suites"@en
+                                                     ]
+                                                   ) ;
+                                RDF:type OWL:Class
+                              ] .
+
+
+###  http://example.org/SwimmingPool
+EX:SwimmingPool RDF:type OWL:Class ;
+                OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                           [ RDF:type OWL:Restriction ;
+                                                             OWL:onProperty SDO:value ;
+                                                             OWL:hasValue "Swimming Pool"@en
+                                                           ]
+                                                         ) ;
+                                      RDF:type OWL:Class
+                                    ] .
+
+
+
+
+
+###  http://example.org/WheelchairAccess
+EX:WheelchairAccess RDF:type OWL:Class ;
+                    OWL:equivalentClass [ OWL:intersectionOf ( SDO:LocationFeatureSpecification
+                                                               [ RDF:type OWL:Restriction ;
+                                                                 OWL:onProperty SDO:value ;
+                                                                 OWL:hasValue "Wheelchair access"@en
+                                                               ]
+                                                             ) ;
+                                          RDF:type OWL:Class
+                                        ] .
+
