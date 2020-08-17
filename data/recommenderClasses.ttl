@@ -33,7 +33,7 @@ EX:Business RDF:type OWL:Class ;
                                                        [ OWL:intersectionOf ( [ RDF:type OWL:Class ;
                                                                                 OWL:complementOf [ RDF:type OWL:Restriction ;
                                                                                                    OWL:onProperty SDO:amenityFeature ;
-                                                                                                   OWL:hasValue EX:tripAdviserAmmenity08
+                                                                                                   OWL:hasValue EX:tripAdviserAmmenity08 # due to open world assumption individual has to be selected for now. 
                                                                                                  ]
                                                                               ]
                                                                               [ RDF:type OWL:Restriction ;
@@ -65,7 +65,7 @@ EX:Family RDF:type OWL:Class ;
                                                      [ OWL:intersectionOf ( [ RDF:type OWL:Class ;
                                                                               OWL:complementOf [ RDF:type OWL:Restriction ;
                                                                                                  OWL:onProperty SDO:amenityFeature ;
-                                                                                                 OWL:hasValue EX:tripAdviserAmmenity09
+                                                                                                 OWL:hasValue EX:tripAdviserAmmenity09 # due to open world assumption individual has to be selected for now. 
                                                                                                ]
                                                                             ]
                                                                             [ RDF:type OWL:Restriction ;
@@ -104,7 +104,7 @@ EX:Wellness RDF:type OWL:Class ;
                                                                               ]
                                                                               [ RDF:type OWL:Restriction ;
                                                                                 OWL:onProperty SDO:amenityFeature ;
-                                                                                OWL:hasValue EX:tripAdviserAmmenity08
+                                                                                OWL:hasValue EX:tripAdviserAmmenity08 # due to open world assumption individual has to be selected for now. 
                                                                               ]
                                                                             ) ;
                                                          RDF:type OWL:Class

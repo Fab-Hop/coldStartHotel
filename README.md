@@ -1,8 +1,17 @@
 # coldStartHotel
 
-This project 
+This project illustrates the usage of schema level expert knowledge represented in a knowledge graph to define user-specific item subclasses, which are used to generate suitable recommendations based on representative user restrictions on the example of hotel recommendations.
 
 ## Structure
+* `data`
+ * `combined.ttl`: Abox and Tbox of the recommender system.
+ * `inferredInstances.ttl`: Result of DL reasoner.
+ * `recommenderClasses.ttl`: Tbox of the recommender system.
+ * `tripadvisor.csv`: instance dataset.
+ * `tripadvisor.ttl`: converted TripAdvisor dataset by utilizing schema.org classes. 
+ * `TripAdvisor-Dataset.zip`: zipped instance dataset. 
+* `extractTripAdvisorData.py`: Reads TripAdvisor dataset and creates corresponding triples, which can be used 
+* `requirements.txt`: Python requirements for `extractTripAdvisorData.py` script. 
 
 ## Installation
 
@@ -17,4 +26,14 @@ mv data/ratingswithcontextandmetadata.csv data/tripadvisor.csv
 ```
 
 ### Python
-The project uses Python 3. The required libaries are saved to the `requirements.txt` file and can be install with `pip install -r requirements.txt'  
+The project uses Python 3. The required libaries are saved to the `requirements.txt` file and can be install with `pip install -r requirements.txt'. 
+
+## Create Recommendations
+
+### Extract data
+Run the `extractTripAdvisorData.py` script. 
+### Combine RecommenderClasses and instances
+Merge the extracted triple with the defined hotel subclasses. 
+### Run DL reasoner
+Run a reasoner on the combined file. The results are obtained with FaCT 1.6.5. 
+
